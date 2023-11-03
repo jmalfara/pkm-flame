@@ -61,22 +61,20 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   void update(double dt) {
-    _updatePlayerMovement(dt);
+    _updatePlayerDirection(dt);
+
     rayPosition =
         ((directionVector * 100) + Vector2(tileSize.x / 2, tileSize.y))
             .toOffset();
 
-    // print("Position: $position");
-    // print("RayOrigin: ${position + rayOrigin.toVector2()}");
     final ray = Ray2(
       origin: position + rayOrigin.toVector2(),
       direction: directionVector,
     );
     RaycastResult<ShapeHitbox>? result = collisionDetection?.raycast(ray);
-    if (result != null) {
-      barrierInView = result.intersectionPoint;
-      print(barrierInView);
-    }
+
+    bool canMove = (result?.distance ?? double.infinity) > 8;
+    _updatePlayerMovement(canMove, dt);
 
     super.update(dt);
   }
@@ -146,21 +144,9 @@ class Player extends SpriteAnimationGroupComponent
             amount: amount, stepTime: stepTime, textureSize: textureSize));
   }
 
-  void _updatePlayerMovement(double dt) {
+  void _updatePlayerDirection(double dt) {
     if (movingToTile != null) {
-      // Move to position
-      Vector2 target = movingToTile!.clone();
-      target.multiply(tileSize);
-      if (target == barrierInView) {
-        print("Collision");
-        movingToTile = null;
-        return;
-      }
-      position.moveToTarget(target, moveSpeed * dt);
-
-      if (target == position) {
-        movingToTile = null;
-      }
+      // Player is moving. Wait until the movement is done.
       return;
     }
 
@@ -171,44 +157,54 @@ class Player extends SpriteAnimationGroupComponent
       movementDelay = 0;
     }
 
+    Map<PlayerState, PlayerState> idleStates = {
+      PlayerState.walkDown: PlayerState.idleDown,
+      PlayerState.walkUp: PlayerState.idleUp,
+      PlayerState.walkRight: PlayerState.idleRight,
+      PlayerState.walkLeft: PlayerState.idleLeft,
+    };
+
     switch (playerDirection) {
       case PlayerDirection.left:
-        directionVector = Vector2(-1, 0);
-        triggerMovement(PlayerState.walkLeft, directionVector, dt);
+        triggerMovement(PlayerState.walkLeft, Vector2(-1, 0));
         break;
       case PlayerDirection.right:
-        directionVector = Vector2(1, 0);
-        triggerMovement(PlayerState.walkRight, directionVector, dt);
+        triggerMovement(PlayerState.walkRight, Vector2(1, 0));
         break;
       case PlayerDirection.up:
-        directionVector = Vector2(0, -1);
-        triggerMovement(PlayerState.walkUp, directionVector, dt);
+        triggerMovement(PlayerState.walkUp, Vector2(0, -1));
         break;
       case PlayerDirection.down:
-        directionVector = Vector2(0, 1);
-        triggerMovement(PlayerState.walkDown, directionVector, dt);
+        triggerMovement(PlayerState.walkDown, Vector2(0, 1));
         break;
       case PlayerDirection.idle:
-        switch (current) {
-          case PlayerState.walkDown:
-            current = PlayerState.idleDown;
-            break;
-          case PlayerState.walkUp:
-            current = PlayerState.idleUp;
-            break;
-          case PlayerState.walkRight:
-            current = PlayerState.idleRight;
-            break;
-          case PlayerState.walkLeft:
-            current = PlayerState.idleLeft;
-            break;
-        }
+        current = idleStates[current] ?? current;
         return;
     }
   }
 
-  void triggerMovement(
-      PlayerState newState, Vector2 directionVector, double dt) {
+  void _updatePlayerMovement(bool canMove, double dt) {
+    if (!canMove) {
+      movingToTile = null;
+      return;
+    }
+
+    if (movingToTile != null) {
+      // Move to position
+      Vector2 target = movingToTile!.clone();
+      target.multiply(tileSize);
+      position.moveToTarget(target, moveSpeed * dt);
+
+      if (target == position) {
+        movingToTile = null;
+      }
+      return;
+    }
+  }
+
+  void triggerMovement(PlayerState newState, Vector2 direction) {
+    directionVector = direction;
+
     bool isIdle = current == PlayerState.idleDown ||
         current == PlayerState.idleUp ||
         current == PlayerState.idleLeft ||
@@ -226,11 +222,18 @@ class Player extends SpriteAnimationGroupComponent
       double currentTileY = (position.y / tileSize.y).truncateToDouble();
       Vector2 currentTileVector = Vector2(currentTileX, currentTileY);
       movingToTile = currentTileVector + directionVector;
+      current = newState;
     } else {
       // Just change the state. We want to be able to just move direction with a single tap.
-      movementDelay = 0.05;
+      movementDelay = 0.08;
+      Map<PlayerState, PlayerState> stateSelector = {
+        PlayerState.walkDown: PlayerState.idleDown,
+        PlayerState.walkUp: PlayerState.idleUp,
+        PlayerState.walkRight: PlayerState.idleRight,
+        PlayerState.walkLeft: PlayerState.idleLeft,
+      };
+      current = stateSelector[newState];
     }
-    current = newState;
   }
 
   @override

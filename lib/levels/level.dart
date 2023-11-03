@@ -25,21 +25,14 @@ class Level extends World
     level = await TiledComponent.load(levelName, Vector2.all(16));
     add(level);
 
-    // final barriersLayer = level.tileMap.getLayer<ObjectGroup>('Barriers');
-    // List<TiledObject> barrierObjects = barriersLayer?.objects ?? [];
-    // print(barrierObjects.length);
-    // for (final object in barrierObjects) {
-    //   Vector2 position = Vector2(object.x, object.y);
-    //   StaticBarrier barrier = StaticBarrier(
-    //       position: position, size: Vector2(object.width, object.height));
-    //   print(position);
-    //   add(barrier);
-    //   break;
-    // }
-    Vector2 position = Vector2(160, 160);
-    StaticBarrier barrier =
-        StaticBarrier(position: position, size: Vector2(16, 16));
-    add(barrier);
+    final barriersLayer = level.tileMap.getLayer<ObjectGroup>('Barriers');
+    List<TiledObject> barrierObjects = barriersLayer?.objects ?? [];
+    for (final object in barrierObjects) {
+      Vector2 position = Vector2(object.x, object.y);
+      StaticBarrier barrier = StaticBarrier(
+          position: position, size: Vector2(object.width, object.height));
+      add(barrier);
+    }
 
     final spawnPointLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoints');
     for (final spawnPoint in spawnPointLayer?.objects ?? []) {

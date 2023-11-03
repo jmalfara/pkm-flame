@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="530">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="560">
  <tileset firstgid="1" source="terrain.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="csv">
@@ -45,265 +45,29 @@
 183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183,183
 </data>
  </layer>
- <objectgroup id="5" name="Bush" class="Bush">
-  <object id="247" template="Bush/Bush_Green.tx" x="80" y="400"/>
-  <object id="249" template="Bush/Bush_Green.tx" x="64" y="400"/>
-  <object id="250" template="Bush/Bush_Green.tx" x="48" y="400"/>
-  <object id="251" template="Bush/Bush_Green.tx" x="32" y="400"/>
-  <object id="252" template="Bush/Bush_Green.tx" x="32" y="416"/>
-  <object id="253" template="Bush/Bush_Green.tx" x="64" y="416"/>
-  <object id="254" template="Bush/Bush_Green.tx" x="48" y="416"/>
-  <object id="255" template="Bush/Bush_Green.tx" x="96" y="400"/>
-  <object id="256" template="Bush/Bush_Green.tx" x="96" y="416"/>
-  <object id="257" template="Bush/Bush_Green.tx" x="80" y="416"/>
-  <object id="258" template="Bush/Bush_Green.tx" x="112" y="416"/>
-  <object id="259" template="Bush/Bush_Green.tx" x="112" y="400"/>
-  <object id="261" template="Bush/Bush_Green.tx" x="128" y="400"/>
-  <object id="262" template="Bush/Bush_Green.tx" x="128" y="416"/>
-  <object id="263" template="Bush/Bush_Green.tx" x="128" y="432"/>
-  <object id="264" template="Bush/Bush_Green.tx" x="128" y="448"/>
-  <object id="265" template="Bush/Bush_Green.tx" x="128" y="464"/>
-  <object id="266" template="Bush/Bush_Green.tx" x="128" y="480"/>
-  <object id="267" template="Bush/Bush_Green.tx" x="128" y="480"/>
-  <object id="268" template="Bush/Bush_Green.tx" x="128" y="496"/>
-  <object id="269" template="Bush/Bush_Green.tx" x="112" y="496"/>
-  <object id="270" template="Bush/Bush_Green.tx" x="112" y="480"/>
-  <object id="271" template="Bush/Bush_Green.tx" x="112" y="448"/>
-  <object id="272" template="Bush/Bush_Green.tx" x="112" y="464"/>
-  <object id="273" template="Bush/Bush_Green.tx" x="112" y="432"/>
-  <object id="276" template="Bush/Bush_Green.tx" x="96" y="448"/>
-  <object id="277" template="Bush/Bush_Green.tx" x="96" y="432"/>
-  <object id="278" template="Bush/Bush_Green.tx" x="80" y="432"/>
-  <object id="279" template="Bush/Bush_Green.tx" x="64" y="432"/>
-  <object id="280" template="Bush/Bush_Green.tx" x="48" y="432"/>
-  <object id="281" template="Bush/Bush_Green.tx" x="32" y="432"/>
-  <object id="282" template="Bush/Bush_Green.tx" x="32" y="448"/>
-  <object id="283" template="Bush/Bush_Green.tx" x="48" y="448"/>
-  <object id="284" template="Bush/Bush_Green.tx" x="80" y="448"/>
-  <object id="285" template="Bush/Bush_Green.tx" x="64" y="448"/>
-  <object id="288" template="Bush/Bush_Green.tx" x="48" y="464"/>
-  <object id="289" template="Bush/Bush_Green.tx" x="48" y="480"/>
-  <object id="290" template="Bush/Bush_Green.tx" type="Bush_Green" x="48" y="496"/>
- </objectgroup>
+ <objectgroup id="5" name="Bush" class="Bush"/>
  <objectgroup id="4" name="Barriers" class="Barriers">
-  <object id="293" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="128"/>
-  <object id="294" template="Barrier/Barrier_Static.tx" x="32" y="160"/>
-  <object id="305" template="Barrier/Barrier_Static.tx" x="32" y="144"/>
-  <object id="306" template="Barrier/Barrier_Static.tx" x="32" y="176"/>
-  <object id="307" template="Barrier/Barrier_Static.tx" x="32" y="208"/>
-  <object id="308" template="Barrier/Barrier_Static.tx" x="32" y="192"/>
-  <object id="309" template="Barrier/Barrier_Static.tx" x="32" y="224"/>
-  <object id="310" template="Barrier/Barrier_Static.tx" x="32" y="240"/>
-  <object id="311" template="Barrier/Barrier_Static.tx" x="32" y="256"/>
-  <object id="312" template="Barrier/Barrier_Static.tx" x="32" y="272"/>
-  <object id="313" template="Barrier/Barrier_Static.tx" x="32" y="288"/>
-  <object id="314" template="Barrier/Barrier_Static.tx" x="32" y="304"/>
-  <object id="315" template="Barrier/Barrier_Static.tx" x="32" y="320"/>
-  <object id="316" template="Barrier/Barrier_Static.tx" x="32" y="336"/>
-  <object id="317" template="Barrier/Barrier_Static.tx" x="32" y="352"/>
-  <object id="318" template="Barrier/Barrier_Static.tx" x="48" y="368"/>
-  <object id="319" template="Barrier/Barrier_Static.tx" x="64" y="368"/>
-  <object id="320" template="Barrier/Barrier_Static.tx" x="80" y="368"/>
-  <object id="321" template="Barrier/Barrier_Static.tx" x="96" y="368"/>
-  <object id="322" template="Barrier/Barrier_Static.tx" x="144" y="368"/>
-  <object id="323" template="Barrier/Barrier_Static.tx" x="128" y="368"/>
-  <object id="324" template="Barrier/Barrier_Static.tx" x="112" y="368"/>
-  <object id="325" template="Barrier/Barrier_Static.tx" x="144" y="384"/>
-  <object id="326" template="Barrier/Barrier_Static.tx" x="144" y="400"/>
-  <object id="327" template="Barrier/Barrier_Static.tx" x="144" y="416"/>
-  <object id="328" template="Barrier/Barrier_Static.tx" x="144" y="432"/>
-  <object id="329" template="Barrier/Barrier_Static.tx" x="144" y="448"/>
-  <object id="330" template="Barrier/Barrier_Static.tx" x="144" y="464"/>
-  <object id="331" template="Barrier/Barrier_Static.tx" x="144" y="480"/>
-  <object id="332" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="32"/>
-  <object id="333" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="32"/>
-  <object id="334" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="80" y="32"/>
-  <object id="335" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="32"/>
-  <object id="336" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="112" y="32"/>
-  <object id="337" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="32"/>
-  <object id="338" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="144" y="32"/>
-  <object id="339" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="160" y="32"/>
-  <object id="340" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="176" y="32"/>
-  <object id="341" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="192" y="32"/>
-  <object id="342" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="208" y="32"/>
-  <object id="343" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="224" y="32"/>
-  <object id="344" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="240" y="32"/>
-  <object id="345" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="256" y="32"/>
-  <object id="346" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="272" y="32"/>
-  <object id="347" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="288" y="32"/>
-  <object id="348" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="304" y="32"/>
-  <object id="349" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="304" y="16"/>
-  <object id="350" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="304" y="0"/>
-  <object id="351" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="0"/>
-  <object id="352" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="16"/>
-  <object id="353" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="32"/>
-  <object id="354" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="384" y="32"/>
-  <object id="355" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="400" y="32"/>
-  <object id="356" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="416" y="32"/>
-  <object id="357" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="432" y="32"/>
-  <object id="358" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="448" y="32"/>
-  <object id="359" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="464" y="32"/>
-  <object id="360" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="480" y="32"/>
-  <object id="361" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="496" y="32"/>
-  <object id="362" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="512" y="32"/>
-  <object id="363" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="528" y="32"/>
-  <object id="364" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="544" y="32"/>
-  <object id="365" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="560" y="32"/>
-  <object id="366" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="576" y="32"/>
-  <object id="367" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="32"/>
-  <object id="368" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="48"/>
-  <object id="369" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="64"/>
-  <object id="370" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="80"/>
-  <object id="371" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="96"/>
-  <object id="372" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="112"/>
-  <object id="373" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="128"/>
-  <object id="374" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="144"/>
-  <object id="375" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="160"/>
-  <object id="376" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="176"/>
-  <object id="377" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="192"/>
-  <object id="378" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="208"/>
-  <object id="379" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="224"/>
-  <object id="380" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="240"/>
-  <object id="381" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="256"/>
-  <object id="382" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="272"/>
-  <object id="383" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="288"/>
-  <object id="384" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="304"/>
-  <object id="385" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="320"/>
-  <object id="386" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="336"/>
-  <object id="387" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="352"/>
-  <object id="388" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="384"/>
-  <object id="390" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="368"/>
-  <object id="391" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="400"/>
-  <object id="392" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="416"/>
-  <object id="393" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="448"/>
-  <object id="394" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="432"/>
-  <object id="395" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="464"/>
-  <object id="396" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="496"/>
-  <object id="397" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="480"/>
-  <object id="398" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="512"/>
-  <object id="399" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="528"/>
-  <object id="400" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="544"/>
-  <object id="401" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="560"/>
-  <object id="402" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="576"/>
-  <object id="403" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="592" y="592"/>
-  <object id="404" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="576" y="592"/>
-  <object id="405" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="544" y="592"/>
-  <object id="406" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="560" y="592"/>
-  <object id="407" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="528" y="592"/>
-  <object id="408" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="512" y="592"/>
-  <object id="409" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="496" y="592"/>
-  <object id="410" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="480" y="592"/>
-  <object id="411" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="464" y="592"/>
-  <object id="412" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="448" y="592"/>
-  <object id="413" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="432" y="592"/>
-  <object id="414" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="416" y="592"/>
-  <object id="415" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="400" y="592"/>
-  <object id="416" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="384" y="592"/>
-  <object id="417" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="592"/>
-  <object id="418" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="352" y="592"/>
-  <object id="419" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="336" y="592"/>
-  <object id="420" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="320" y="592"/>
-  <object id="421" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="304" y="592"/>
-  <object id="422" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="288" y="592"/>
-  <object id="423" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="272" y="592"/>
-  <object id="424" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="256" y="592"/>
-  <object id="425" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="240" y="592"/>
-  <object id="426" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="224" y="592"/>
-  <object id="427" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="208" y="592"/>
-  <object id="428" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="192" y="592"/>
-  <object id="429" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="176" y="592"/>
-  <object id="430" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="160" y="592"/>
-  <object id="431" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="144" y="592"/>
-  <object id="432" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="592"/>
-  <object id="433" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="112" y="592"/>
-  <object id="434" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="592"/>
-  <object id="435" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="80" y="592"/>
-  <object id="436" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="592"/>
-  <object id="437" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="592"/>
-  <object id="438" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="592"/>
-  <object id="439" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="576"/>
-  <object id="440" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="560"/>
-  <object id="441" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="544"/>
-  <object id="442" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="528"/>
-  <object id="443" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="512"/>
-  <object id="444" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="496"/>
-  <object id="445" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="480"/>
-  <object id="446" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="464"/>
-  <object id="447" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="448"/>
-  <object id="448" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="496"/>
-  <object id="449" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="512"/>
-  <object id="450" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="528"/>
-  <object id="451" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="544"/>
-  <object id="452" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="496"/>
-  <object id="453" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="144" y="496"/>
-  <object id="454" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="160" y="496"/>
-  <object id="455" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="176" y="496"/>
-  <object id="456" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="256" y="496"/>
-  <object id="457" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="272" y="496"/>
-  <object id="458" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="288" y="496"/>
-  <object id="459" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="304" y="496"/>
-  <object id="460" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="240" y="496"/>
-  <object id="461" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="192" y="496"/>
-  <object id="462" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="192" y="480"/>
-  <object id="463" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="224" y="480"/>
-  <object id="464" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="224" y="496"/>
-  <object id="465" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="224" y="464"/>
-  <object id="466" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="208" y="464"/>
-  <object id="467" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="192" y="464"/>
-  <object id="468" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="496"/>
-  <object id="469" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="112" y="496"/>
-  <object id="470" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="480"/>
-  <object id="471" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="464"/>
-  <object id="472" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="80" y="464"/>
-  <object id="473" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="464"/>
-  <object id="474" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="480"/>
-  <object id="475" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="496"/>
-  <object id="476" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="496"/>
-  <object id="477" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="480"/>
-  <object id="478" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="368" y="464"/>
-  <object id="479" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="384" y="464"/>
-  <object id="480" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="400" y="464"/>
-  <object id="481" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="416" y="464"/>
-  <object id="482" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="432" y="464"/>
-  <object id="483" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="448" y="464"/>
-  <object id="484" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="464" y="464"/>
-  <object id="485" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="480" y="464"/>
-  <object id="486" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="496" y="464"/>
-  <object id="487" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="512" y="464"/>
-  <object id="488" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="512" y="480"/>
-  <object id="489" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="512" y="496"/>
-  <object id="490" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="480" y="496"/>
-  <object id="493" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="464" y="496"/>
-  <object id="494" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="448" y="496"/>
-  <object id="497" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="432" y="496"/>
-  <object id="498" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="416" y="496"/>
-  <object id="501" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="400" y="496"/>
-  <object id="502" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="384" y="496"/>
-  <object id="504" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="528" y="496"/>
-  <object id="505" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="544" y="496"/>
-  <object id="506" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="560" y="496"/>
-  <object id="507" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="576" y="496"/>
-  <object id="508" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="576" y="448"/>
-  <object id="509" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="560" y="448"/>
-  <object id="510" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="544" y="448"/>
-  <object id="511" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="528" y="448"/>
-  <object id="513" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="112"/>
-  <object id="514" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="112"/>
-  <object id="515" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="80" y="112"/>
-  <object id="516" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="112"/>
-  <object id="517" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="112" y="112"/>
-  <object id="518" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="112"/>
-  <object id="519" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="96"/>
-  <object id="520" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="128" y="80"/>
-  <object id="521" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="112" y="80"/>
-  <object id="522" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="96" y="80"/>
-  <object id="523" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="80" y="80"/>
-  <object id="524" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="48" y="80"/>
-  <object id="525" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="64" y="80"/>
-  <object id="528" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="64"/>
-  <object id="529" template="Barrier/Barrier_Static.tx" type="Barrier_Static" x="32" y="48"/>
+  <object id="531" x="32" y="32" width="16" height="352"/>
+  <object id="532" x="48" y="368" width="112" height="16"/>
+  <object id="533" x="144" y="384" width="16" height="112"/>
+  <object id="534" x="96" y="496" width="112" height="16"/>
+  <object id="535" x="224" y="496" width="96" height="16"/>
+  <object id="538" x="48" y="496" width="32" height="16"/>
+  <object id="539" x="48" y="512" width="16" height="48"/>
+  <object id="540" x="32" y="560" width="16" height="32"/>
+  <object id="542" x="32" y="592" width="576" height="16"/>
+  <object id="543" x="592" y="32" width="16" height="560"/>
+  <object id="544" x="368" y="32" width="224" height="16"/>
+  <object id="545" x="368" y="0" width="16" height="32"/>
+  <object id="546" x="304" y="0" width="16" height="32"/>
+  <object id="547" x="48" y="32" width="272" height="16"/>
+  <object id="548" x="368" y="464" width="128" height="48"/>
+  <object id="551" x="512" y="464" width="80" height="48"/>
+  <object id="554" x="192" y="464" width="48" height="32"/>
+  <object id="555" x="496" y="464" width="16" height="32"/>
+  <object id="557" x="64" y="464" width="48" height="32"/>
  </objectgroup>
  <objectgroup id="2" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="336" y="416" width="16" height="16"/>
+  <object id="559" name="Player" type="Player" x="208" y="512" width="16" height="16"/>
  </objectgroup>
 </map>
