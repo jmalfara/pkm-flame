@@ -36,6 +36,10 @@ class Player extends SpriteAnimationGroupComponent
   Vector2 directionVector = Vector2(0, 1);
   Vector2 playerBase = Vector2.zero();
 
+  // Movement
+  double movementDelay = 0;
+  Vector2? barrierInView;
+
   // Raycasting
   CollisionDetection<ShapeHitbox, Broadphase<ShapeHitbox>>? collisionDetection;
   Paint rayPaint = Paint()..color = Colors.red.withOpacity(0.6);
@@ -70,8 +74,8 @@ class Player extends SpriteAnimationGroupComponent
     );
     RaycastResult<ShapeHitbox>? result = collisionDetection?.raycast(ray);
     if (result != null) {
-      print(result.distance);
-      print(result.intersectionPoint);
+      barrierInView = result.intersectionPoint;
+      print(barrierInView);
     }
 
     super.update(dt);
@@ -147,6 +151,11 @@ class Player extends SpriteAnimationGroupComponent
       // Move to position
       Vector2 target = movingToTile!.clone();
       target.multiply(tileSize);
+      if (target == barrierInView) {
+        print("Collision");
+        movingToTile = null;
+        return;
+      }
       position.moveToTarget(target, moveSpeed * dt);
 
       if (target == position) {
@@ -155,31 +164,29 @@ class Player extends SpriteAnimationGroupComponent
       return;
     }
 
-    double currentTileX = (position.x / tileSize.x).truncateToDouble();
-    double currentTileY = (position.y / tileSize.y).truncateToDouble();
-    double nextTileX = currentTileX;
-    double nextTileY = currentTileY;
+    if (movementDelay > 0) {
+      movementDelay -= dt;
+      return;
+    } else {
+      movementDelay = 0;
+    }
 
     switch (playerDirection) {
       case PlayerDirection.left:
-        current = PlayerState.walkLeft;
         directionVector = Vector2(-1, 0);
-        nextTileX--;
+        triggerMovement(PlayerState.walkLeft, directionVector, dt);
         break;
       case PlayerDirection.right:
-        current = PlayerState.walkRight;
         directionVector = Vector2(1, 0);
-        nextTileX++;
+        triggerMovement(PlayerState.walkRight, directionVector, dt);
         break;
       case PlayerDirection.up:
-        current = PlayerState.walkUp;
         directionVector = Vector2(0, -1);
-        nextTileY--;
+        triggerMovement(PlayerState.walkUp, directionVector, dt);
         break;
       case PlayerDirection.down:
-        current = PlayerState.walkDown;
         directionVector = Vector2(0, 1);
-        nextTileY++;
+        triggerMovement(PlayerState.walkDown, directionVector, dt);
         break;
       case PlayerDirection.idle:
         switch (current) {
@@ -196,9 +203,34 @@ class Player extends SpriteAnimationGroupComponent
             current = PlayerState.idleLeft;
             break;
         }
-        break;
+        return;
     }
-    movingToTile = Vector2(nextTileX, nextTileY);
+  }
+
+  void triggerMovement(
+      PlayerState newState, Vector2 directionVector, double dt) {
+    bool isIdle = current == PlayerState.idleDown ||
+        current == PlayerState.idleUp ||
+        current == PlayerState.idleLeft ||
+        current == PlayerState.idleRight;
+
+    bool isDirectionSame = current == newState ||
+        current == PlayerState.idleDown && newState == PlayerState.walkDown ||
+        current == PlayerState.idleUp && newState == PlayerState.walkUp ||
+        current == PlayerState.idleLeft && newState == PlayerState.walkLeft ||
+        current == PlayerState.idleRight && newState == PlayerState.walkRight;
+
+    if (!isIdle || isDirectionSame) {
+      // Move the player
+      double currentTileX = (position.x / tileSize.x).truncateToDouble();
+      double currentTileY = (position.y / tileSize.y).truncateToDouble();
+      Vector2 currentTileVector = Vector2(currentTileX, currentTileY);
+      movingToTile = currentTileVector + directionVector;
+    } else {
+      // Just change the state. We want to be able to just move direction with a single tap.
+      movementDelay = 0.05;
+    }
+    current = newState;
   }
 
   @override
