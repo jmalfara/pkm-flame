@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="../terrain.tsx"/>
- <object name="Bush_Green" type="Bush_Green" gid="94" width="16" height="16"/>
+ <object name="Bush_Green" type="Bush_Green" gid="94" width="16" height="16">
+  <properties>
+   <property name="type" value="Bush_Green"/>
+  </properties>
+ </object>
 </template>

@@ -1,14 +1,11 @@
 import 'dart:async';
 
 import 'package:app/actors/player.dart';
-import 'package:app/levels/static_barrier.dart';
+import 'package:app/objects/barriers/static_barrier.dart';
+import 'package:app/objects/bushes/Bush.dart';
 import 'package:app/pixel_adventure.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/extensions.dart';
-import 'package:flame/geometry.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
 
 class Level extends World
     with HasGameRef<PixelAdventure>, HasCollisionDetection {
@@ -17,7 +14,6 @@ class Level extends World
   final Player player;
   final int tileSetWidth = 88;
 
-  ShapeHitbox? hitbox;
   Level({required this.levelName, required this.player});
 
   @override
@@ -34,6 +30,15 @@ class Level extends World
       add(barrier);
     }
 
+    final bushesLayer = level.tileMap.getLayer<ObjectGroup>('Bushes');
+    List<TiledObject> bushObjects = bushesLayer?.objects ?? [];
+    for (final object in bushObjects) {
+      Vector2 position = Vector2(object.x, object.y);
+      Bush bush =
+          Bush(position: position, size: Vector2(object.width, object.height));
+      add(bush);
+    }
+
     final spawnPointLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoints');
     for (final spawnPoint in spawnPointLayer?.objects ?? []) {
       switch (spawnPoint.class_) {
@@ -43,29 +48,6 @@ class Level extends World
           break;
       }
     }
-
-    player.collisionDetection = collisionDetection;
-
     return super.onLoad();
-  }
-
-  Paint rayPaint = Paint()..color = Colors.red.withOpacity(0.6);
-
-  @override
-  void update(double dt) {
-    // TODO: implement update
-    super.update(dt);
-
-    // print(player.directionVector);
-    // final ray = Ray2(
-    //   origin: player.position,
-    //   direction: player.directionVector,
-    // );
-    // final result = collisionDetection.raycast(ray);
-    // print(result?.distance);
-    // hitbox = result?.hitbox;
-    // hitbox?.paint = rayPaint;
-    // print(result?.distance);
-    // player.position = result?.intersectionPoint ?? Vector2(0, 0);
   }
 }

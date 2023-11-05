@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:ui';
 
+import 'package:app/actors/player_direction.dart';
+import 'package:app/objects/_base/tile_actor.dart';
 import 'package:app/pixel_adventure.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/extensions.dart';
-import 'package:flame/geometry.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 enum PlayerState {
@@ -20,63 +17,50 @@ enum PlayerState {
   idleDown
 }
 
-enum PlayerDirection { left, right, up, down, idle }
-
-class Player extends SpriteAnimationGroupComponent
+class Player extends TileActor
     with HasGameRef<PixelAdventure>, KeyboardHandler {
-  late final SpriteAnimation idleAnimation;
-  late final SpriteAnimation runningAnimation;
   final double stepTime = 0.1;
-  final Vector2 tileSize = Vector2(16, 16);
-  double moveSpeed = 100; //Tiles Per Second.
-  Vector2? movingToTile;
-
   String character;
-  PlayerDirection playerDirection = PlayerDirection.idle;
-  Vector2 directionVector = Vector2(0, 1);
-  Vector2 playerBase = Vector2.zero();
 
-  // Movement
-  double movementDelay = 0;
-  Vector2? barrierInView;
-
-  // Raycasting
-  CollisionDetection<ShapeHitbox, Broadphase<ShapeHitbox>>? collisionDetection;
-  Paint rayPaint = Paint()..color = Colors.red.withOpacity(0.6);
-  late Offset rayOrigin;
-  late Offset rayPosition;
-  Vector2? intersection;
-
-  Player({position, this.character = 'Player'}) : super(position: position) {
-    // debugMode = true;
-  }
+  Player({position, required size, this.character = 'Player'})
+      : super(position: position, size: size);
 
   @override
   FutureOr<void> onLoad() {
     _loadAllAnimations();
-    rayOrigin = Offset(tileSize.x / 2, 24);
-    transform.offset = Vector2(0, 11);
+    size = Vector2(16, 21);
+    transform.offset = Vector2(0, -5);
     return super.onLoad();
   }
 
   @override
-  void update(double dt) {
-    _updatePlayerDirection(dt);
+  onTileUpdate() {
+    super.onTileUpdate();
 
-    rayPosition =
-        ((directionVector * 100) + Vector2(tileSize.x / 2, tileSize.y))
-            .toOffset();
+    Map<PlayerState, PlayerState> idleStates = {
+      PlayerState.walkDown: PlayerState.idleDown,
+      PlayerState.walkUp: PlayerState.idleUp,
+      PlayerState.walkRight: PlayerState.idleRight,
+      PlayerState.walkLeft: PlayerState.idleLeft,
+    };
 
-    final ray = Ray2(
-      origin: position + rayOrigin.toVector2(),
-      direction: directionVector,
-    );
-    RaycastResult<ShapeHitbox>? result = collisionDetection?.raycast(ray);
-
-    bool canMove = (result?.distance ?? double.infinity) > 8;
-    _updatePlayerMovement(canMove, dt);
-
-    super.update(dt);
+    switch (playerDirection.runtimeType) {
+      case PlayerDirectionLeft:
+        triggerMovement(PlayerState.walkLeft);
+        break;
+      case PlayerDirectionRight:
+        triggerMovement(PlayerState.walkRight);
+        break;
+      case PlayerDirectionUp:
+        triggerMovement(PlayerState.walkUp);
+        break;
+      case PlayerDirectionDown:
+        triggerMovement(PlayerState.walkDown);
+        break;
+      case PlayerDirectionIdle:
+        current = idleStates[current] ?? current;
+        return;
+    }
   }
 
   @override
@@ -144,67 +128,7 @@ class Player extends SpriteAnimationGroupComponent
             amount: amount, stepTime: stepTime, textureSize: textureSize));
   }
 
-  void _updatePlayerDirection(double dt) {
-    if (movingToTile != null) {
-      // Player is moving. Wait until the movement is done.
-      return;
-    }
-
-    if (movementDelay > 0) {
-      movementDelay -= dt;
-      return;
-    } else {
-      movementDelay = 0;
-    }
-
-    Map<PlayerState, PlayerState> idleStates = {
-      PlayerState.walkDown: PlayerState.idleDown,
-      PlayerState.walkUp: PlayerState.idleUp,
-      PlayerState.walkRight: PlayerState.idleRight,
-      PlayerState.walkLeft: PlayerState.idleLeft,
-    };
-
-    switch (playerDirection) {
-      case PlayerDirection.left:
-        triggerMovement(PlayerState.walkLeft, Vector2(-1, 0));
-        break;
-      case PlayerDirection.right:
-        triggerMovement(PlayerState.walkRight, Vector2(1, 0));
-        break;
-      case PlayerDirection.up:
-        triggerMovement(PlayerState.walkUp, Vector2(0, -1));
-        break;
-      case PlayerDirection.down:
-        triggerMovement(PlayerState.walkDown, Vector2(0, 1));
-        break;
-      case PlayerDirection.idle:
-        current = idleStates[current] ?? current;
-        return;
-    }
-  }
-
-  void _updatePlayerMovement(bool canMove, double dt) {
-    if (!canMove) {
-      movingToTile = null;
-      return;
-    }
-
-    if (movingToTile != null) {
-      // Move to position
-      Vector2 target = movingToTile!.clone();
-      target.multiply(tileSize);
-      position.moveToTarget(target, moveSpeed * dt);
-
-      if (target == position) {
-        movingToTile = null;
-      }
-      return;
-    }
-  }
-
-  void triggerMovement(PlayerState newState, Vector2 direction) {
-    directionVector = direction;
-
+  void triggerMovement(PlayerState newState) {
     bool isIdle = current == PlayerState.idleDown ||
         current == PlayerState.idleUp ||
         current == PlayerState.idleLeft ||
@@ -218,14 +142,10 @@ class Player extends SpriteAnimationGroupComponent
 
     if (!isIdle || isDirectionSame) {
       // Move the player
-      double currentTileX = (position.x / tileSize.x).truncateToDouble();
-      double currentTileY = (position.y / tileSize.y).truncateToDouble();
-      Vector2 currentTileVector = Vector2(currentTileX, currentTileY);
-      movingToTile = currentTileVector + directionVector;
       current = newState;
     } else {
       // Just change the state. We want to be able to just move direction with a single tap.
-      movementDelay = 0.08;
+      newDirectionDelay = 0.08;
       Map<PlayerState, PlayerState> stateSelector = {
         PlayerState.walkDown: PlayerState.idleDown,
         PlayerState.walkUp: PlayerState.idleUp,
@@ -234,17 +154,5 @@ class Player extends SpriteAnimationGroupComponent
       };
       current = stateSelector[newState];
     }
-  }
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-    Offset center = rayOrigin.translate(0, -8);
-    canvas.drawLine(
-      center,
-      rayPosition,
-      rayPaint,
-    );
-    canvas.drawCircle(center, 1, rayPaint);
   }
 }

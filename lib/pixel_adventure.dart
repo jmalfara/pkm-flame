@@ -1,5 +1,6 @@
 import 'dart:async';
 
+// import 'package:app/actors/player.dart';
 import 'package:app/actors/player.dart';
 import 'package:app/levels/level.dart';
 import 'package:flame/components.dart';
@@ -20,7 +21,7 @@ class PixelAdventure extends FlameGame
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
 
-    player = Player();
+    player = Player(size: Vector2(16, 16));
     final world = Level(levelName: 'map.tmx', player: player);
 
     cam = CameraComponent.withFixedResolution(
