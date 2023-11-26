@@ -3,8 +3,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class StaticBarrier extends PositionComponent with CollisionCallbacks, Barrier {
-  StaticBarrier({required position, required size, bool debugMode = false})
-      : super(position: position, size: size) {
+  StaticBarrier({super.position, super.size, bool debugMode = false}) {
     debugMode = debugMode;
   }
 

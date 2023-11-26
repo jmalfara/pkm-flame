@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <object name="Barrier_Static" type="Barrier_Static" width="16" height="16">
-  <properties>
-   <property name="Custom Prop" value="12341"/>
-  </properties>
- </object>
-</template>

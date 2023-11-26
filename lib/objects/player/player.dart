@@ -1,6 +1,9 @@
-import 'dart:async';
+// ignore_for_file: type_literal_in_constant_pattern
 
-import 'package:app/actors/player_direction.dart';
+import 'dart:async';
+import 'dart:ui';
+
+import 'package:app/objects/player/player_direction.dart';
 import 'package:app/objects/_base/tile_actor.dart';
 import 'package:app/pixel_adventure.dart';
 import 'package:flame/components.dart';
@@ -22,8 +25,7 @@ class Player extends TileActor
   final double stepTime = 0.1;
   String character;
 
-  Player({position, required size, this.character = 'Player'})
-      : super(position: position, size: size);
+  Player({super.position, super.size, this.character = 'Player'});
 
   @override
   FutureOr<void> onLoad() {

@@ -5,7 +5,9 @@
     },
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
-        "."
+        "Bush",
+        ".",
+        "Barrier"
     ],
     "fileStates": {
         "PixelAdventure.tsx": {
@@ -57,11 +59,11 @@
             }
         },
         "map.tmx": {
-            "scale": 0.4268,
-            "selectedLayer": 0,
+            "scale": 1.8317,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 215.55763823805057,
-                "y": 674.7891283973756
+                "x": 56.23191570672053,
+                "y": 679.6964568433694
             }
         },
         "sprites.tsx": {
@@ -69,8 +71,8 @@
             "scaleInEditor": 0.75
         },
         "terrain.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 0.5148
+            "scaleInDock": 1.7686,
+            "scaleInEditor": 1.52
         }
     },
     "last.imagePath": "/Users/jmalfara/Documents/PocketAdventure/app/assets/images/Terrain",
@@ -82,16 +84,16 @@
     "map.width": 40,
     "mapScene.enableWorlds": true,
     "openFiles": [
-        "level.tmx",
-        "gen3_2.tsx",
+        "terrain.tsx",
         "map.tmx"
     ],
     "project": "PixelAdventure.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "terrain.tsx",
+        "map.tmx",
         "level.tmx",
         "gen3_2.tsx",
-        "map.tmx",
         "PixelAdventure.tsx",
         "level-01.tmx",
         "sprites.tsx",

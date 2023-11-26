@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:app/actors/player_direction.dart';
+import 'package:app/objects/player/player_direction.dart';
 import 'package:app/extensions/vector_extensions.dart';
 import 'package:app/objects/_base/tile.dart';
 import 'package:app/objects/barriers/barrier.dart';
@@ -16,8 +16,7 @@ class TileActor extends Tile {
   Vector2? movingToTile;
   Map<int, Rect> tileCollisionMap = {};
 
-  TileActor({position, required size, this.moveSpeed = 100})
-      : super(position: position, size: size);
+  TileActor({super.position, super.size, this.moveSpeed = 100});
 
   @override
   RectangleHitbox loadHitbox() {
@@ -25,7 +24,6 @@ class TileActor extends Tile {
     hitbox.transform.x = 0;
     hitbox.transform.y = 5;
     hitbox.collisionType = CollisionType.active;
-    // hitbox.debugMode = true;
     return hitbox;
   }
 
@@ -60,10 +58,8 @@ class TileActor extends Tile {
       newDirectionDelay = 0;
     }
 
-    double currentTileX = (position.x / tileSize.x).truncateToDouble();
-    double currentTileY = (position.y / tileSize.y).truncateToDouble();
-    Vector2 currentTileVector = Vector2(currentTileX, currentTileY);
-    movingToTile = currentTileVector + playerDirection.directionVector;
+    Vector2 currentTileVector = position.toTileVector(tileSize);
+    moveToTile(currentTileVector + playerDirection.directionVector);
   }
 
   @override
@@ -88,6 +84,21 @@ class TileActor extends Tile {
     tileCollisionMap.remove(other.hashCode);
   }
 
+  void moveToTile(Vector2 tile) {
+    // if (canMoveTo(tile)) {
+    movingToTile = tile;
+    // }
+  }
+
+  void movePlayer(PlayerDirection direction) {
+    if (movingToTile != null) {
+      return;
+    }
+    playerDirection = direction;
+    Vector2 currentTileVector = position.toTileVector(tileSize);
+    moveToTile(currentTileVector + playerDirection.directionVector);
+  }
+
   bool canMoveTo(Vector2 tile) {
     dynamic collidedRec = tileCollisionMap.entries
         .map((e) => e.value)
@@ -95,6 +106,15 @@ class TileActor extends Tile {
         .firstOrNull;
 
     return collidedRec == null;
+  }
+
+  void teleport(Vector2 tile, Vector2? moveToTile) {
+    position = Vector2(tile.x * tileSize.x, tile.y * tileSize.y);
+    if (moveToTile != null) {
+      movingToTile = moveToTile;
+    } else {
+      movingToTile = tile;
+    }
   }
 
   onTileUpdate() {}

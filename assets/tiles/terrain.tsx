@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="Terrain (16x16)" tilewidth="16" tileheight="16" tilecount="6072" columns="88">
+<tileset version="1.10" tiledversion="1.10.2" name="Terrain (16x16)" tilewidth="16" tileheight="16" tilecount="6072" columns="88" backgroundcolor="#0000ff" tilerendersize="grid" fillmode="preserve-aspect-fit">
  <image source="../images/Terrain/Terrain (16x16).png" width="1408" height="1104"/>
  <tile id="18">
   <objectgroup draworder="index" id="2">

@@ -6,11 +6,9 @@ import 'package:flame/components.dart';
 class Tile extends SpriteAnimationGroupComponent with CollisionCallbacks {
   // Movement
   final Vector2 tileSize = Vector2(16, 16);
-  bool isBarrier;
   bool entered = false;
 
-  Tile({position, required size, this.isBarrier = false})
-      : super(position: position, size: size);
+  Tile({super.position, super.size});
 
   @override
   FutureOr<void> onLoad() {
