@@ -153,7 +153,7 @@
   <object id="925" x="208" y="496" width="16" height="16">
    <properties>
     <property name="destinationX" type="int" value="1"/>
-    <property name="destinationY" type="int" value="42"/>
+    <property name="destinationY" type="int" value="43"/>
    </properties>
   </object>
   <object id="929" x="16" y="672" width="16" height="16">

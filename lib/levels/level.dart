@@ -140,8 +140,6 @@ class Level extends World
     for (final object in objects) {
       int destinationX = object.properties.getValue('destinationX');
       int destinationY = object.properties.getValue('destinationY');
-      print(destinationX);
-      print(destinationY);
       Vector2 destination =
           Vector2(destinationX.toDouble(), destinationY.toDouble());
       Vector2 position = Vector2(object.x, object.y);
@@ -150,7 +148,6 @@ class Level extends World
         position: position,
         size: tileSize,
         toTile: destination,
-        moveToTile: destination,
       );
       add(tile);
     }

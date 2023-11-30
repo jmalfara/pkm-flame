@@ -7,12 +7,13 @@ class Tile extends SpriteAnimationGroupComponent with CollisionCallbacks {
   // Movement
   final Vector2 tileSize = Vector2(16, 16);
   bool entered = false;
+  late RectangleHitbox hitbox;
 
   Tile({super.position, super.size});
 
   @override
   FutureOr<void> onLoad() {
-    RectangleHitbox hitbox = loadHitbox();
+    hitbox = loadHitbox();
     add(hitbox);
     return super.onLoad();
   }

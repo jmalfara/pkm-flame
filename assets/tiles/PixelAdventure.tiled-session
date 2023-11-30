@@ -6,8 +6,8 @@
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
         "Bush",
-        ".",
-        "Barrier"
+        "Barrier",
+        "."
     ],
     "fileStates": {
         "PixelAdventure.tsx": {
@@ -62,8 +62,8 @@
             "scale": 1.8317,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 56.23191570672053,
-                "y": 679.6964568433694
+                "x": 162.14445596986405,
+                "y": 513.7304143691651
             }
         },
         "sprites.tsx": {

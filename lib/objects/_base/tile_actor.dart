@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:app/objects/player/player_direction.dart';
@@ -10,17 +11,18 @@ import 'package:flame/extensions.dart';
 
 class TileActor extends Tile {
   // Movement
+  PlayerDirection nextPlayerDirection = PlayerDirection.idle;
   PlayerDirection playerDirection = PlayerDirection.idle;
   double moveSpeed;
-  double newDirectionDelay = 0;
   Vector2? movingToTile;
+  Completer<bool>? moveToTileCompleter;
   Map<int, Rect> tileCollisionMap = {};
 
-  TileActor({super.position, super.size, this.moveSpeed = 100});
+  TileActor({super.position, super.size, this.moveSpeed = 10});
 
   @override
   RectangleHitbox loadHitbox() {
-    RectangleHitbox hitbox = RectangleHitbox(size: tileSize);
+    hitbox = RectangleHitbox(size: tileSize);
     hitbox.transform.x = 0;
     hitbox.transform.y = 5;
     hitbox.collisionType = CollisionType.active;
@@ -32,10 +34,11 @@ class TileActor extends Tile {
     super.update(dt);
 
     if (movingToTile != null) {
+      // print(movingToTile);
       // Check for collisions
       bool canMoveToTile = canMoveTo(movingToTile!);
       if (!canMoveToTile) {
-        movingToTile = null;
+        completeMoveToTile();
         return;
       }
 
@@ -45,21 +48,18 @@ class TileActor extends Tile {
       position.moveToTarget(target, moveSpeed * dt);
 
       if (target == position) {
-        movingToTile = null;
+        completeMoveToTile();
       }
       return;
     }
 
     onTileUpdate();
-    if (newDirectionDelay > 0) {
-      newDirectionDelay -= dt;
-      return;
-    } else {
-      newDirectionDelay = 0;
-    }
 
     Vector2 currentTileVector = position.toTileVector(tileSize);
-    moveToTile(currentTileVector + playerDirection.directionVector);
+    Vector2 nextTile = currentTileVector + playerDirection.directionVector;
+    moveToTile(nextTile, () {
+      print("Tile Moved");
+    });
   }
 
   @override
@@ -84,21 +84,6 @@ class TileActor extends Tile {
     tileCollisionMap.remove(other.hashCode);
   }
 
-  void moveToTile(Vector2 tile) {
-    // if (canMoveTo(tile)) {
-    movingToTile = tile;
-    // }
-  }
-
-  void movePlayer(PlayerDirection direction) {
-    if (movingToTile != null) {
-      return;
-    }
-    playerDirection = direction;
-    Vector2 currentTileVector = position.toTileVector(tileSize);
-    moveToTile(currentTileVector + playerDirection.directionVector);
-  }
-
   bool canMoveTo(Vector2 tile) {
     dynamic collidedRec = tileCollisionMap.entries
         .map((e) => e.value)
@@ -108,14 +93,41 @@ class TileActor extends Tile {
     return collidedRec == null;
   }
 
-  void teleport(Vector2 tile, Vector2? moveToTile) {
-    position = Vector2(tile.x * tileSize.x, tile.y * tileSize.y);
-    if (moveToTile != null) {
-      movingToTile = moveToTile;
-    } else {
-      movingToTile = tile;
+  changeDirection(PlayerDirection direction) {
+    nextPlayerDirection = direction;
+  }
+
+  void completeMoveToTile() {
+    movingToTile = null;
+    if (moveToTileCompleter?.isCompleted == false) {
+      moveToTileCompleter?.complete(false);
     }
+    onUpdateTileAnimation(playerDirection, nextPlayerDirection);
+    playerDirection = nextPlayerDirection;
+  }
+
+  void moveToTile(Vector2 tile, Function callback) async {
+    movingToTile = tile;
+    moveToTileCompleter = Completer();
+    await moveToTileCompleter?.future;
+    moveToTileCompleter = null;
+    callback();
+  }
+
+  void teleport(Vector2 tile, PlayerDirection direction) {
+    current = direction;
+    // onUpdateTileAnimation(direction, PlayerDirection.idle);
+    hitbox.collisionType = CollisionType.inactive;
+    position = Vector2(tile.x * tileSize.x, tile.y * tileSize.y);
+    playerDirection = direction;
+    nextPlayerDirection = PlayerDirection.idle;
+    completeMoveToTile();
+    moveToTile(tile, () {
+      hitbox.collisionType = CollisionType.active;
+    });
   }
 
   onTileUpdate() {}
+  onUpdateTileAnimation(
+      PlayerDirection oldDirection, PlayerDirection newDirection) {}
 }
